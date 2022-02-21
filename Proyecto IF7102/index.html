@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/fontawesome.css" />
     <link rel="stylesheet" href="assets/css/templatemo-host-cloud.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
+    <link rel="stylesheet" href="assets/css/estiloBasico.css"/>
     <!--
 
 
@@ -86,14 +87,12 @@ https://templatemo.com/tm-541-host-cloud
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <div class="header-text caption">
-              <h2>Buscar Pelicula</h2>
+              <h2>Buscar Película</h2>
               <div id="search-section">
-                <form id="suggestion_form" name="gs" method="get" action="#">
                   <div class="searchText">
                     <input
                       type="text"
-                      name="q"
-                      class="searchText"
+                      class="searchText form-control"
                       id="buscarpelicula"
                       placeholder="Escribe la pelicula aqui..."
                       autocomplete="on"
@@ -101,17 +100,8 @@ https://templatemo.com/tm-541-host-cloud
                   </div>
                   
                   <div class="container">
-                    
-                    <input
-                    type="submit"
-                    name="results"
-                    id="buscar"
-                    class="main-button"
-                    value="Buscar"
-                  />
+                    <button class="btn btn-info btn-lg" id="buscar">Buscar</button>
                   </div>
-
-                </form>
                 <div class="advSearch_chkbox"></div>
               </div>
             </div>
@@ -163,39 +153,13 @@ https://templatemo.com/tm-541-host-cloud
      Trusted Ends Here -->
 
     <div class="trusted-section">
-      <h3   style="color:white; text-align:center">Pelicula buscada:</h3>
-      <div class="trusted-section">
-        
-
-        <div class="services-section">
-          
-          <div class="service-item col-md-12">
-            <img  id="imgpeli" width="550" height="600">
-            
-            <div class="nombrepeli">
-              <h4 style="color:white" id="nombrepeli"></h4>
-            </div>
-
-            <div class="actores">
-              <h4 style="color:white" id="actores"></h4>
-            </div>
-
-            <div class="año">
-              <h4 style="color:white" id="año"></h4>
-            </div>
-
-            <div class="ranking">
-              <h4 style="color:white" id="ranking"></h4>
-            </div>
-
-            <div class="categoria">
-              <h4 style="color:white" id="categoria"></h4>
-            </div>
-
-
-          </div>
+      <h3   style="color:white; text-align:center">Películas:</h3>
+        <div class="contenedor" id="contenedor">
         </div>
-      </div>
+        <div class="paginacion">
+          <button id="btnAnterior">Anterior</button>
+          <button id="btnSiguiente">Siguiente</button>
+        </div>
     </div>
 
     <!-- Services Starts Here 
@@ -492,7 +456,7 @@ https://templatemo.com/tm-541-host-cloud
           <div class="col-md-12">
             <div class="footer">
               <p>
-                Copyright &copy; 2022 InfoPelis - Designed by Kenny Richards, Axel Chavarria & ****
+                Copyright &copy; 2022 InfoPelis - Designed by Kenny Richards, Axel Chavarria & Pablo Mora
               </p>
             </div>
           </div>

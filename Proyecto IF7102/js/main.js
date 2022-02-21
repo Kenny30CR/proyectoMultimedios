@@ -1,52 +1,81 @@
 import { MY_API_KEY } from './config.js';
 
-(function onLoad()
-{
-    // Funcion del boton buscar
-    setButtonFunctions();
+let page= 1;
+const btnAnterior= document.getElementById('btnAnterior');
+const btnSiguiente= document.getElementById('btnSiguiente');
+const btnBuscar= document.getElementById('buscar');
 
-    // fetch del API
-    //getCurrencyExchangeRates();
-})();
+//Button events
+btnAnterior.addEventListener('click', ()=>{
+    if(page > 1){
+        page -=1;
+        loadMovies();
+    }
+});
 
-function setButtonFunctions()
-{
-    document.getElementById('buscar').onclick = getCurrencyExchangeRates;
-   
-}
+btnSiguiente.addEventListener('click', ()=>{
+    if(page < 1000){
+        page +=1;
+        loadMovies();
+    }
+});
 
-
-// Currency Exchange rates
-async function getCurrencyExchangeRates()
-{
-    console.log("boton buscar")
-    const q = document.getElementById('buscarpelicula').value;
+btnBuscar.addEventListener('click', ()=>{ 
+    if(document.getElementById('buscarpelicula').value != 0){
+        searchMovie();
+    }
     
-    await fetch("https://imdb8.p.rapidapi.com/auto-complete?q=" + q , {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": MY_API_KEY
+ });
+
+async function loadMovies(){
+    try{
+        const answer= await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${MY_API_KEY}&language=es-MX&page=${page}`);
+        let { status }= answer;
+
+        if(status === 200){
+            let movies= '';
+            const data = await answer.json();
+            data.results.forEach(movie => {
+                movies += `
+                <div class="pelicula">
+                <img class="poster" src=https://image.tmdb.org/t/p/w500/${movie.poster_path}>
+                <h3 class="titulo">${movie.title}</h3>
+                </div>
+                `;
+            });
+            document.getElementById('contenedor').innerHTML=movies;
         }
-    })
-    .then(response => response.json())
-    .then(response => {
-        console.log("Pelicula:");
-        console.log(response.d[0].l);
-        console.log("\n");
 
-        
-
-        // Mostrar datos
-        document.getElementById('nombrepeli').innerHTML =  response.d[0].l;
-        document.getElementById('imgpeli').src =  response.d[0].i.imageUrl;
-        //document.getElementById('trailerpeli').src = response.d[0].v[0];
-        document.getElementById('actores').innerHTML = 'Actores: '+  response.d[0].s;
-        document.getElementById('año').innerHTML = 'Año: '+ response.d[0].y;
-        document.getElementById('ranking').innerHTML = 'Ranking: '+ response.d[0].rank;
-        document.getElementById('categoria').innerHTML ='Categoria: '+  response.d[0].q;
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    }catch(error){ console.log(error); }
 }
+
+async function searchMovie(){
+    let movieToSearch = document.getElementById('buscarpelicula').value;
+    try{
+        let findMovies= '';
+        const answer= await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${MY_API_KEY}&language=es-MX&query=${movieToSearch}&page=${page}&include_adult=false`);
+
+        if(answer.status === 200){
+            const data = await answer.json();
+            if(data.results.length > 0){
+            data.results.forEach(movie => {
+                if(movie.backdrop_path){
+                    findMovies += `
+                    <div class="pelicula">
+                    <img class="poster" src=https://image.tmdb.org/t/p/w500/${movie.poster_path}>
+                    <h3 class="titulo">${movie.title}</h3>
+                    </div>
+                    `;
+                }
+            });
+        }else{ 
+            document.getElementById('contenedor').innerHTML='No hay películas';
+        }
+            document.getElementById('contenedor').innerHTML=findMovies;
+            document.getElementById('buscarpelicula').value='';
+            
+        }
+    }catch(error){ console.log(error); }
+}
+
+loadMovies();
