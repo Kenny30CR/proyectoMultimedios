@@ -63,6 +63,7 @@ a.gradient-button:hover {
 }
 .section-heading {
 	margin-bottom: 80px;
+	
 }
 .section-heading span {
 	color: #00bcd4;
@@ -85,7 +86,7 @@ a.gradient-button:hover {
 }
 
 .page-heading {
-	background-image: url(../images/heading-bg.jpg);
+	background-image: url(../images/jeff-pierre-5X5I20O_Vbg-unsplash.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -118,7 +119,7 @@ a.gradient-button:hover {
 }
 #preloader {
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(114,2,187,1) 0%, rgba(50,100,245,1) 100%);
+  background: linear-gradient(145deg, rgb(64, 62, 66) 0%, rgb(149, 153, 164) 100%);
   left: 0;
   right: 0;
   top: 0;
@@ -788,7 +789,7 @@ footer .sub-footer a {
 /* About Us Page Style */
 .about-us {
 	padding: 140px 0px;
-	background-color: #f7f7f7;
+	background-color: #181717;
 }
 .about-us .left-image {
 	margin-right: 30px;
@@ -856,7 +857,8 @@ footer .sub-footer a {
 
 /* Team Style */
 .team-section {
-	margin-top: 140px;
+	
+	background-color: #181717;
 }
 .team-section .section-heading {
 	text-align: center;
